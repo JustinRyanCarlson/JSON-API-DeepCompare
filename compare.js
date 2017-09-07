@@ -26,13 +26,13 @@ function logResults() {
     let dynamoTimer = simple_timer.get('dynamo').delta;
     let timeDiff = Math.abs(simple_timer.get('sql').delta - simple_timer.get('dynamo').delta);
 
-    console.log("SQL query took: " + sqlTimer + " milliseconds");
-    console.log("Dynamo query took: " + dynamoTimer + " milliseconds");
+    console.log("SQL endpoint request took: " + sqlTimer + " milliseconds");
+    console.log("Dynamo endpoint request took: " + dynamoTimer + " milliseconds");
 
     if (sqlTimer < dynamoTimer) {
-        console.log("The SQL query was faster by " + timeDiff + " milliseconds\n");
+        console.log("The SQL endpoint request was faster by " + timeDiff + " milliseconds\n");
     } else if (sqlTimer > dynamoTimer) {
-        console.log("The Dynamo query was faster by " + timeDiff + " milliseconds\n");
+        console.log("The Dynamo endpoint request was faster by " + timeDiff + " milliseconds\n");
     } else {
         console.log("The Dynamo and SQL were equally as fast\n");
     }
