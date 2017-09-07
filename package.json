@@ -1,0 +1,22 @@
+{
+  "name": "json-api-deepcompare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compare.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustinRyanCarlson/JSON-API-DeepCompare.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustinRyanCarlson/JSON-API-DeepCompare/issues"
+  },
+  "homepage": "https://github.com/JustinRyanCarlson/JSON-API-DeepCompare#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
