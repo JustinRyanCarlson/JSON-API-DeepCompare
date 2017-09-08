@@ -2,9 +2,10 @@ let request = require('request');
 let _ = require('lodash');
 const sqlUrl = process.argv[2];
 const dynamoUrl = sqlUrl + "&db=dynamo";
-let simple_timer = require('simple-timer')
 let sqlRes;
 let dynamoRes;
+let sqlTimer;
+let dynamoTimer;
 let numOfResponse = 0;
 
 setInterval(function(){ 
@@ -22,9 +23,7 @@ setInterval(function(){
  }, 100);
 
 function logResults() {
-    let sqlTimer = simple_timer.get('sql').delta;
-    let dynamoTimer = simple_timer.get('dynamo').delta;
-    let timeDiff = Math.abs(simple_timer.get('sql').delta - simple_timer.get('dynamo').delta);
+    let timeDiff = Math.abs(sqlTimer - dynamoTimer).toFixed(2);
 
     console.log("SQL endpoint request took: " + sqlTimer + " milliseconds");
     console.log("Dynamo endpoint request took: " + dynamoTimer + " milliseconds");
@@ -38,16 +37,16 @@ function logResults() {
     }
 }
 
-simple_timer.start('sql');
-request(sqlUrl, function (error, response, body) {
-    simple_timer.stop('sql');
+
+request({url: sqlUrl, time:true}, function (error, response, body) {
+    sqlTimer = response.timings.end.toFixed(2);
     sqlRes = body;
     numOfResponse++;
 });
 
-simple_timer.start('dynamo');
-request(sqlUrl, function (error, response, body) {
-    simple_timer.stop('dynamo');
+
+request({url: dynamoUrl, time:true}, function (error, response, body) {
+    dynamoTimer = response.timings.end.toFixed(2);
     dynamoRes = body;
     numOfResponse++;
 });
