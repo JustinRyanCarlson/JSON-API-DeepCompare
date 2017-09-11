@@ -1,5 +1,6 @@
 let request = require('request');
 let _ = require('lodash');
+var pd = require('pretty-data').pd;
 const sqlUrl = process.argv[2];
 const dynamoUrl = sqlUrl + "&db=dynamo";
 let sqlRes;
@@ -11,10 +12,14 @@ let numOfResponse = 0;
 setInterval(function(){ 
     if (numOfResponse == 2) {
         if (_.isEqual(sqlRes, dynamoRes)) {
+            console.log("\n SQL Response: \n" + pd.json(sqlRes));
+            console.log("\n\n Dynamo Response: \n" + pd.json(dynamoRes));
             console.log('\nMatch\n');
             logResults();
             process.exit()
         } else {
+            console.log(sqlRes);
+            console.log(dynamoRes);
             console.log('\nNo match\n');
             logResults();
             process.exit()
