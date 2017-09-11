@@ -18,8 +18,8 @@ setInterval(function(){
             logResults();
             process.exit()
         } else {
-            console.log(sqlRes);
-            console.log(dynamoRes);
+            console.log("\n SQL Response: \n" + pd.json(sqlRes));
+            console.log("\n\n Dynamo Response: \n" + pd.json(dynamoRes));
             console.log('\nNo match\n');
             logResults();
             process.exit()
