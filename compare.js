@@ -11,24 +11,22 @@ let numOfResponse = 0;
 
 setInterval(function(){ 
     if (numOfResponse == 2) {
-        if (_.isEqual(sqlRes, dynamoRes)) {
-            console.log("\n SQL Response: \n" + pd.json(sqlRes));
-            console.log("\n\n Dynamo Response: \n" + pd.json(dynamoRes));
-            console.log('\nMatch\n');
-            logResults();
+        if (_.isEqual(sqlRes, dynamoRes)) {            
+            logResults("Match");
             process.exit()
         } else {
-            console.log("\n SQL Response: \n" + pd.json(sqlRes));
-            console.log("\n\n Dynamo Response: \n" + pd.json(dynamoRes));
-            console.log('\nNo match\n');
-            logResults();
+            logResults("No match");
             process.exit()
         }
     }
  }, 100);
 
-function logResults() {
+function logResults(result) {
     let timeDiff = Math.abs(sqlTimer - dynamoTimer).toFixed(2);
+
+    console.log("\n SQL Response: \n" + pd.json(sqlRes));
+    console.log("\n\n Dynamo Response: \n" + pd.json(dynamoRes));
+    console.log("\n" + result + "\n");
 
     console.log("SQL endpoint request took: " + sqlTimer + " milliseconds");
     console.log("Dynamo endpoint request took: " + dynamoTimer + " milliseconds");
